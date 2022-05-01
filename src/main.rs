@@ -59,6 +59,7 @@ fn main() {
         beautifyshow(days as i32, hours as i32, mins as i32, secs as i32);
 
         thread::sleep(delay);
+        std::process::Command::new("clear").status().unwrap();
     }
 }
 
