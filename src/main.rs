@@ -30,16 +30,16 @@ fn main() {
 
 
     println!("input year: ");
-    let mut iyear = numin!();
+    let iyear = numin!();
 
     println!("input month: ");
-    let mut imonth = numin!();
+    let imonth = numin!();
 
     println!("input day: ");
-    let mut iday = numin!();
+    let iday = numin!();
 
     println!("input hour: ");
-    let mut ihour = numin!();
+    let ihour = numin!();
 
     let delay = time::Duration::from_secs(1);
 

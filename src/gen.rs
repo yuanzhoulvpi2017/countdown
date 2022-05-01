@@ -6,12 +6,12 @@ pub fn show_one2(number: &String) -> Box<Vec<String>> {
     let nheight = 30;
     let gap_value = 120 as u8;
 
-    let mut imagepath ="".to_string();
+    let mut imagepath = "".to_string();
     if number == ":" {
         let number = "maohao";
-         imagepath = format!("C:\\Users\\yuanz\\PycharmProjects\\PP0430001\\NumberSimple\\{}.png", number);
+        imagepath = format!("C:\\Users\\yuanz\\ClionProjects\\countdown\\NumberSimple\\{}.png", number);
     } else {
-        imagepath = format!("C:\\Users\\yuanz\\PycharmProjects\\PP0430001\\NumberSimple\\{}.png", number);
+        imagepath = format!("C:\\Users\\yuanz\\ClionProjects\\countdown\\NumberSimple\\{}.png", number);
     }
 
     let gray = open(imagepath).unwrap()
@@ -50,12 +50,12 @@ pub fn show_label(number: &String) -> Box<Vec<String>> {
     let nheight = 28;
     let gap_value = 120 as u8;
 
-    let mut imagepath ="".to_string();
+    let mut imagepath = "".to_string();
     if number == ":" {
         let number = "maohao";
-        imagepath = format!("C:\\Users\\yuanz\\PycharmProjects\\PP0430001\\NumberSimple\\{}.png", number);
+        imagepath = format!("C:\\Users\\yuanz\\ClionProjects\\countdown\\NumberSimple\\{}.png", number);
     } else {
-        imagepath = format!("C:\\Users\\yuanz\\PycharmProjects\\PP0430001\\NumberSimple\\{}.png", number);
+        imagepath = format!("C:\\Users\\yuanz\\ClionProjects\\countdown\\NumberSimple\\{}.png", number);
     }
 
     let gray = open(imagepath).unwrap()
@@ -88,13 +88,13 @@ pub fn show_label(number: &String) -> Box<Vec<String>> {
     return Box::new(showdata);
 }
 
-pub fn showtotaldate(inputstr:&String) {
+pub fn showtotaldate(inputstr: &String) {
     // part 2
     let mut temp_list = Vec::new();
     // let mut tempcharacter = "20:23:56:56".to_string();
     let tempcharacter = inputstr;
     for index in 0..tempcharacter.len() {
-        temp_list.push(&tempcharacter[(index)..(index+1)]);
+        temp_list.push(&tempcharacter[(index)..(index + 1)]);
     }
 
 
@@ -109,22 +109,17 @@ pub fn showtotaldate(inputstr:&String) {
         let mut index = 0;
         for x in simple_vector {
             final_vector[index].push_str(&*x);
-            index +=1;
-
+            index += 1;
         }
     }
 
     for temp in final_vector {
         println!("{}", temp)
-
     }
-
 }
 
 pub fn showtotallabel() {
-
-
-    let mut temp_list = vec!["day", "hou", "min", "sec"];
+    let temp_list = vec!["day", "hou", "min", "sec"];
 
 
     let mut final_vector = vec![];
@@ -138,19 +133,16 @@ pub fn showtotallabel() {
         let mut index = 0;
         for x in simple_vector {
             final_vector[index].push_str(&*x);
-            index +=1;
-
+            index += 1;
         }
     }
 
     for temp in final_vector {
         println!("{}", temp)
-
     }
-
 }
 
-pub fn beautifyshow(day:i32, hour:i32, min:i32, sec:i32) {
+pub fn beautifyshow(day: i32, hour: i32, min: i32, sec: i32) {
     // let day = 20;
     // let hour = 1;
     // let min = 1;
@@ -158,6 +150,5 @@ pub fn beautifyshow(day:i32, hour:i32, min:i32, sec:i32) {
     let datecollect = format!("{:02}:{:02}:{:02}:{:02}", day, hour, min, sec);
     showtotallabel();
     showtotaldate(&datecollect);
-
 }
 
