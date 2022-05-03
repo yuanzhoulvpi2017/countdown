@@ -7,14 +7,15 @@ pub fn show_one2(number: &String) -> Box<Vec<String>> {
     let nheight = 30;
     let gap_value = 120 as u8;
 
-    let mut imagepath = "".to_string();
-    if number == ":" {
-        let number = "maohao";
-        imagepath = format!("C:\\Users\\yuanz\\ClionProjects\\countdown\\NumberSimple\\{}.png", number);
+    let imagepath = if number == ":" {
+        let temp_number = "maohao";
+        let val = format!("C:\\Users\\yuanz\\PycharmProjects\\countdown\\NumberSimple\\{}.png", temp_number);
+        val
     } else {
-        imagepath = format!("C:\\Users\\yuanz\\ClionProjects\\countdown\\NumberSimple\\{}.png", number);
-    }
-    
+        let val = format!("C:\\Users\\yuanz\\PycharmProjects\\countdown\\NumberSimple\\{}.png", number);
+        val
+    };
+
 
     let gray = open(imagepath).unwrap()
         .resize(nwidth, nheight, imageops::FilterType::Nearest)
@@ -52,7 +53,7 @@ pub fn show_label(number: &String) -> Box<Vec<String>> {
     let nheight = 28;
     let gap_value = 120 as u8;
 
-    let imagepath = format!("C:\\Users\\yuanz\\ClionProjects\\countdown\\NumberSimple\\{}.png", number);
+    let imagepath = format!("C:\\Users\\yuanz\\PycharmProjects\\countdown\\NumberSimple\\{}.png", number);
 
     let gray = open(imagepath).unwrap()
         .resize(nwidth, nheight, imageops::FilterType::Nearest)
@@ -111,15 +112,6 @@ impl CountDown {
             simpleword: dict_result,
         };
     }
-    // pub fn check(&self) {
-    //     let var ="2";
-    //     let data = self.simpleword.get(var).unwrap();
-    //     for i in data.iter() {
-    //         println!("{}", i);
-    //     }
-    //
-    //
-    // }
     pub fn showtotallabel(&self) {
         let temp_list = vec!["day", "hou", "min", "sec"];
 
@@ -165,7 +157,6 @@ impl CountDown {
         for tempvalue in temp_list {
             // let simple_vector = *show_one2(&tempvalue.to_string());
             let simple_vector = self.simpleword.get(tempvalue).unwrap();
-            ;
 
 
             let mut index = 0;
@@ -181,14 +172,9 @@ impl CountDown {
     }
 
     pub fn beautifyshow(&self, day: i32, hour: i32, min: i32, sec: i32) {
-        // let day = 20;
-        // let hour = 1;
-        // let min = 1;
-        // let sec = 1;
+
         let datecollect = format!("{:02}:{:02}:{:02}:{:02}", day, hour, min, sec);
-        // showtotallabel();
         self.showtotallabel();
-        // showtotaldate(&datecollect);
         self.showtotaldate(&datecollect);
     }
 }

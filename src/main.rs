@@ -1,5 +1,4 @@
-use std::io::Read;
-use crate::gen::{show_label, show_one2, CountDown};
+use crate::gen::{CountDown};
 use crossterm::terminal::{Clear, ClearType};
 
 mod gen;
@@ -24,12 +23,6 @@ macro_rules! numin {
 fn main() {
     let countdown = CountDown::new();
 
-    // let mut imonth = 0;
-    // let mut iday = 0;
-    // let mut ihour = 0;
-    // let mut imin = 0;
-    // let mut isec = 0;
-
 
     println!("input year: ");
     let iyear = numin!();
@@ -50,7 +43,6 @@ fn main() {
         let targetdate = Utc.ymd(iyear, imonth, iday).and_hms(ihour, 0, 0);
 
         let minus_timestamp = targetdate.timestamp() - curdate;
-        // let minus_timestamp = targetdate2.timestamp() - curdate;
 
 
         let days = minus_timestamp / (86400);
@@ -63,7 +55,6 @@ fn main() {
 
         thread::sleep(delay);
         Clear(ClearType::All);
-        // std::process::Command::new("cls").status().unwrap();
     }
 }
 
