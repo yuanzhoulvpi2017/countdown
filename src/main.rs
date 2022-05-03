@@ -1,9 +1,11 @@
 use std::io::Read;
-use crate::gen::{show_label, show_one2,CountDown};
+use crate::gen::{show_label, show_one2, CountDown};
 use crossterm::terminal::{Clear, ClearType};
+
 mod gen;
+
 use chrono;
-use chrono::{DateTime, TimeZone, Utc, NaiveDateTime};
+use chrono::{TimeZone, Utc};
 
 use std::{thread, time};
 macro_rules! numin {
@@ -55,7 +57,6 @@ fn main() {
         let hours = (minus_timestamp % (86400)) / (3600);
         let mins = (minus_timestamp - days * 86400 - hours * 3600) / 60;
         let secs = (minus_timestamp - days * 86400 - hours * 3600) % 60;
-
 
 
         countdown.beautifyshow(days as i32, hours as i32, mins as i32, secs as i32);

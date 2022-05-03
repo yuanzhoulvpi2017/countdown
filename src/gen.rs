@@ -1,6 +1,7 @@
 use image::{open, imageops};
 use std::collections::HashMap;
 
+#[warn(unused_assignments)]
 pub fn show_one2(number: &String) -> Box<Vec<String>> {
     let nwidth = 20;
     let nheight = 30;
@@ -13,6 +14,7 @@ pub fn show_one2(number: &String) -> Box<Vec<String>> {
     } else {
         imagepath = format!("C:\\Users\\yuanz\\ClionProjects\\countdown\\NumberSimple\\{}.png", number);
     }
+    
 
     let gray = open(imagepath).unwrap()
         .resize(nwidth, nheight, imageops::FilterType::Nearest)
@@ -44,19 +46,13 @@ pub fn show_one2(number: &String) -> Box<Vec<String>> {
     return Box::new(showdata);
 }
 
-
+#[warn(unused_assignments)]
 pub fn show_label(number: &String) -> Box<Vec<String>> {
     let nwidth = 28 * 2;
     let nheight = 28;
     let gap_value = 120 as u8;
 
-    let mut imagepath = "".to_string();
-    if number == ":" {
-        let number = "maohao";
-        imagepath = format!("C:\\Users\\yuanz\\ClionProjects\\countdown\\NumberSimple\\{}.png", number);
-    } else {
-        imagepath = format!("C:\\Users\\yuanz\\ClionProjects\\countdown\\NumberSimple\\{}.png", number);
-    }
+    let imagepath = format!("C:\\Users\\yuanz\\ClionProjects\\countdown\\NumberSimple\\{}.png", number);
 
     let gray = open(imagepath).unwrap()
         .resize(nwidth, nheight, imageops::FilterType::Nearest)
@@ -92,12 +88,11 @@ pub fn show_label(number: &String) -> Box<Vec<String>> {
 // add oop style
 
 
-pub struct CountDown{
-    SimpleWord: HashMap<&'static str, Box<Vec<String>>>,
+pub struct CountDown {
+    simpleword: HashMap<&'static str, Box<Vec<String>>>,
 }
 
 impl CountDown {
-
     pub fn new() -> Self {
         let mut dict_result = HashMap::new();
         let biglist = vec!["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":", "day", "hou", "min", "sec"];
@@ -113,18 +108,18 @@ impl CountDown {
         }
 
         return Self {
-            SimpleWord: dict_result,
+            simpleword: dict_result,
         };
     }
-    pub fn check(&self) {
-        let var ="2";
-        let data = self.SimpleWord.get(var).unwrap();
-        for i in data.iter() {
-            println!("{}", i);
-        }
-
-
-    }
+    // pub fn check(&self) {
+    //     let var ="2";
+    //     let data = self.simpleword.get(var).unwrap();
+    //     for i in data.iter() {
+    //         println!("{}", i);
+    //     }
+    //
+    //
+    // }
     pub fn showtotallabel(&self) {
         let temp_list = vec!["day", "hou", "min", "sec"];
 
@@ -136,7 +131,7 @@ impl CountDown {
 
         for tempvalue in temp_list {
             // let simple_vector = *show_label(&tempvalue.to_string());
-            let simple_vector =  self.SimpleWord.get(tempvalue).unwrap();
+            let simple_vector = self.simpleword.get(tempvalue).unwrap();
 
 
             let mut index = 0;
@@ -169,7 +164,8 @@ impl CountDown {
 
         for tempvalue in temp_list {
             // let simple_vector = *show_one2(&tempvalue.to_string());
-            let simple_vector = self.SimpleWord.get(tempvalue).unwrap();;
+            let simple_vector = self.simpleword.get(tempvalue).unwrap();
+            ;
 
 
             let mut index = 0;
