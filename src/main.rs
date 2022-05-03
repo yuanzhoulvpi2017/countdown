@@ -1,6 +1,6 @@
 use std::io::Read;
 use crate::gen::{show_label, show_one2,CountDown};
-
+use crossterm::terminal::{Clear, ClearType};
 mod gen;
 use chrono;
 use chrono::{DateTime, TimeZone, Utc, NaiveDateTime};
@@ -61,6 +61,7 @@ fn main() {
         countdown.beautifyshow(days as i32, hours as i32, mins as i32, secs as i32);
 
         thread::sleep(delay);
+        Clear(ClearType::All);
         // std::process::Command::new("cls").status().unwrap();
     }
 }
