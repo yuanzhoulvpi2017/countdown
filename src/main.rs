@@ -1,8 +1,7 @@
 use std::io::Read;
-use crate::gen::{show_label, show_one2, showtotaldate, showtotallabel, beautifyshow};
+use crate::gen::{show_label, show_one2,CountDown};
 
 mod gen;
-
 use chrono;
 use chrono::{DateTime, TimeZone, Utc, NaiveDateTime};
 
@@ -21,6 +20,7 @@ macro_rules! numin {
 
 
 fn main() {
+    let countdown = CountDown::new();
 
     // let mut imonth = 0;
     // let mut iday = 0;
@@ -56,11 +56,12 @@ fn main() {
         let mins = (minus_timestamp - days * 86400 - hours * 3600) / 60;
         let secs = (minus_timestamp - days * 86400 - hours * 3600) % 60;
 
-        beautifyshow(days as i32, hours as i32, mins as i32, secs as i32);
+
+
+        countdown.beautifyshow(days as i32, hours as i32, mins as i32, secs as i32);
 
         thread::sleep(delay);
-        std::process::Command::new("clear").status().unwrap();
+        // std::process::Command::new("cls").status().unwrap();
     }
 }
-
 

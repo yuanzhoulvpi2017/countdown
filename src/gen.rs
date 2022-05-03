@@ -1,5 +1,5 @@
 use image::{open, imageops};
-
+use std::collections::HashMap;
 
 pub fn show_one2(number: &String) -> Box<Vec<String>> {
     let nwidth = 20;
@@ -88,67 +88,111 @@ pub fn show_label(number: &String) -> Box<Vec<String>> {
     return Box::new(showdata);
 }
 
-pub fn showtotaldate(inputstr: &String) {
-    // part 2
-    let mut temp_list = Vec::new();
-    // let mut tempcharacter = "20:23:56:56".to_string();
-    let tempcharacter = inputstr;
-    for index in 0..tempcharacter.len() {
-        temp_list.push(&tempcharacter[(index)..(index + 1)]);
+
+// add oop style
+
+
+pub struct CountDown{
+    SimpleWord: HashMap<&'static str, Box<Vec<String>>>,
+}
+
+impl CountDown {
+
+    pub fn new() -> Self {
+        let mut dict_result = HashMap::new();
+        let biglist = vec!["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":", "day", "hou", "min", "sec"];
+        let number = vec!["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":"];
+        for templist in biglist {
+            if number.contains(&templist) {
+                let result = show_one2(&templist.to_string());
+                dict_result.insert(templist, result);
+            } else {
+                let result = show_label(&templist.to_string());
+                dict_result.insert(templist, result);
+            }
+        }
+
+        return Self {
+            SimpleWord: dict_result,
+        };
     }
+    pub fn check(&self) {
+        let var ="2";
+        let data = self.SimpleWord.get(var).unwrap();
+        for i in data.iter() {
+            println!("{}", i);
+        }
 
 
-    let mut final_vector = vec![];
-    for _index in 0..30 {
-        final_vector.push("".to_string());
     }
+    pub fn showtotallabel(&self) {
+        let temp_list = vec!["day", "hou", "min", "sec"];
 
-    for tempvalue in temp_list {
-        let simple_vector = *show_one2(&tempvalue.to_string());
 
-        let mut index = 0;
-        for x in simple_vector {
-            final_vector[index].push_str(&*x);
-            index += 1;
+        let mut final_vector = vec![];
+        for _index in 0..28 {
+            final_vector.push("".to_string());
+        }
+
+        for tempvalue in temp_list {
+            // let simple_vector = *show_label(&tempvalue.to_string());
+            let simple_vector =  self.SimpleWord.get(tempvalue).unwrap();
+
+
+            let mut index = 0;
+            for x in simple_vector.iter() {
+                final_vector[index].push_str(&*x);
+                index += 1;
+            }
+        }
+
+        for temp in final_vector {
+            println!("{}", temp)
         }
     }
 
-    for temp in final_vector {
-        println!("{}", temp)
-    }
-}
 
-pub fn showtotallabel() {
-    let temp_list = vec!["day", "hou", "min", "sec"];
+    pub fn showtotaldate(&self, inputstr: &String) {
+        // part 2
+        let mut temp_list = Vec::new();
+        // let mut tempcharacter = "20:23:56:56".to_string();
+        let tempcharacter = inputstr;
+        for index in 0..tempcharacter.len() {
+            temp_list.push(&tempcharacter[(index)..(index + 1)]);
+        }
 
 
-    let mut final_vector = vec![];
-    for _index in 0..28 {
-        final_vector.push("".to_string());
-    }
+        let mut final_vector = vec![];
+        for _index in 0..30 {
+            final_vector.push("".to_string());
+        }
 
-    for tempvalue in temp_list {
-        let simple_vector = *show_label(&tempvalue.to_string());
+        for tempvalue in temp_list {
+            // let simple_vector = *show_one2(&tempvalue.to_string());
+            let simple_vector = self.SimpleWord.get(tempvalue).unwrap();;
 
-        let mut index = 0;
-        for x in simple_vector {
-            final_vector[index].push_str(&*x);
-            index += 1;
+
+            let mut index = 0;
+            for x in simple_vector.iter() {
+                final_vector[index].push_str(&*x);
+                index += 1;
+            }
+        }
+
+        for temp in final_vector {
+            println!("{}", temp)
         }
     }
 
-    for temp in final_vector {
-        println!("{}", temp)
+    pub fn beautifyshow(&self, day: i32, hour: i32, min: i32, sec: i32) {
+        // let day = 20;
+        // let hour = 1;
+        // let min = 1;
+        // let sec = 1;
+        let datecollect = format!("{:02}:{:02}:{:02}:{:02}", day, hour, min, sec);
+        // showtotallabel();
+        self.showtotallabel();
+        // showtotaldate(&datecollect);
+        self.showtotaldate(&datecollect);
     }
 }
-
-pub fn beautifyshow(day: i32, hour: i32, min: i32, sec: i32) {
-    // let day = 20;
-    // let hour = 1;
-    // let min = 1;
-    // let sec = 1;
-    let datecollect = format!("{:02}:{:02}:{:02}:{:02}", day, hour, min, sec);
-    showtotallabel();
-    showtotaldate(&datecollect);
-}
-
