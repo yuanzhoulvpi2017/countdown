@@ -10,3 +10,6 @@ edition = "2021"
 image = "0.24.2"
 chrono = "0.4"
 crossterm = "0.23.2"
+
+[profile.release]
+opt-level = 3

@@ -1,17 +1,20 @@
 use image::{open, imageops};
 use std::collections::HashMap;
+use std::env::current_dir;
+
 #[warn(unused_assignments)]
 pub fn show_one2(number: &String) -> Box<Vec<String>> {
     let nwidth = 20;
     let nheight = 30;
     let gap_value = 120 as u8;
+    let cur_dir = current_dir().unwrap().into_os_string().into_string().unwrap();
 
     let imagepath = if number == ":" {
         let temp_number = "maohao";
-        let val = format!("C:\\Users\\yuanz\\PycharmProjects\\countdown\\NumberSimple\\{}.png", temp_number);
+        let val = format!("{}/NumberSimple/{}.png", &cur_dir, temp_number);
         val
     } else {
-        let val = format!("C:\\Users\\yuanz\\PycharmProjects\\countdown\\NumberSimple\\{}.png", number);
+        let val = format!("{}/NumberSimple/{}.png", &cur_dir, number);
         val
     };
 
@@ -51,8 +54,9 @@ pub fn show_label(number: &String) -> Box<Vec<String>> {
     let nwidth = 28 * 2;
     let nheight = 28;
     let gap_value = 120 as u8;
+    let cur_dir = current_dir().unwrap().into_os_string().into_string().unwrap();
 
-    let imagepath = format!("C:\\Users\\yuanz\\PycharmProjects\\countdown\\NumberSimple\\{}.png", number);
+    let imagepath = format!("{}/NumberSimple/{}.png", &cur_dir, number);
 
     let gray = open(imagepath).unwrap()
         .resize(nwidth, nheight, imageops::FilterType::Nearest)
@@ -161,17 +165,17 @@ impl CountDown {
             let mut index = 0;
             for x in simple_vector.iter() {
                 final_vector[index].push_str(&*x);
+                // final_vector[index].push_str("****");
                 index += 1;
             }
         }
 
         for temp in final_vector {
-            println!("{}", temp)
+            println!("{}", format!("{}****", temp));
         }
     }
 
     pub fn beautifyshow(&self, day: i32, hour: i32, min: i32, sec: i32) {
-
         let datecollect = format!("{:02}:{:02}:{:02}:{:02}", day, hour, min, sec);
         self.show_total_label();
         self.showtotaldate(&datecollect);
